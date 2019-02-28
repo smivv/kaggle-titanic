@@ -19,6 +19,8 @@ from utils import plot_classification_report, plot_confusion_matrix
 
 import matplotlib.pyplot as plt
 
+DIR = os.path.dirname(os.path.realpath(__file__))
+
 label_column = 'Survived'
 
 cols = numpy.array(['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age',
@@ -30,8 +32,8 @@ num_cols = ['PassengerId', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare']
 # categorical columns
 cat_cols = [item for item in cols if item not in (num_cols + [label_column])]
 
-df_train = pandas.read_csv('/Users/smivv/PycharmProjects/kaggle-titanic/data/train.csv')
-df_test = pandas.read_csv('/Users/smivv/PycharmProjects/kaggle-titanic/data/test.csv')
+df_train = pandas.read_csv(os.path.join(DIR, 'data', 'train.csv'))
+df_test = pandas.read_csv(os.path.join(DIR, 'data', 'test.csv'))
 
 print(df_train.head(10))
 
@@ -91,4 +93,24 @@ lr_y_pred = lr.predict(x_test)
 # print logistic regression result (they should be very poor)
 plot_classification_report(classification_report(y_test.values, lr_y_pred, digits=4))
 plot_confusion_matrix(y_test.values, lr_y_pred, labels=[0, 1])
-print("Accuracy:\n", accuracy_score(y_test.values, lr_y_pred), '\n')
+print("LR Accuracy:\n", accuracy_score(y_test.values, lr_y_pred), '\n')
+
+# build logistic regression model with class balancing
+lr = DecisionTreeClassifier(class_weight='balanced')
+lr.fit(x_train, y_train.values)
+lr_y_pred = lr.predict(x_test)
+
+# print logistic regression result (they should be very poor)
+plot_classification_report(classification_report(y_test.values, lr_y_pred, digits=4))
+plot_confusion_matrix(y_test.values, lr_y_pred, labels=[0, 1])
+print("DTree Accuracy:\n", accuracy_score(y_test.values, lr_y_pred), '\n')
+
+# build logistic regression model with class balancing
+lr = RandomForestClassifier(class_weight='balanced')
+lr.fit(x_train, y_train.values)
+lr_y_pred = lr.predict(x_test)
+
+# print logistic regression result (they should be very poor)
+plot_classification_report(classification_report(y_test.values, lr_y_pred, digits=4))
+plot_confusion_matrix(y_test.values, lr_y_pred, labels=[0, 1])
+print("RForest Accuracy:\n", accuracy_score(y_test.values, lr_y_pred), '\n')
