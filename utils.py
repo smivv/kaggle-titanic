@@ -143,8 +143,8 @@ def plot_confusion_matrix2(y_true, y_pred, labels, ymap=None, figsize=(10, 10)):
     Generate matrix plot of confusion matrix with pretty annotations.
     The plot image is saved to disk.
     args:
-      y_true:    true label of the data, with shape (nsamples,)
-      y_pred:    prediction of the data, with shape (nsamples,)
+      y_true:    true label of the input, with shape (nsamples,)
+      y_pred:    prediction of the input, with shape (nsamples,)
       filename:  filename of figure file to save
       labels:    string array, name the order of class labels in the confusion matrix.
                  use `clf.classes_` if using scikit-learn models.
@@ -188,8 +188,8 @@ def plot_confusion_matrix(y_true, y_pred, labels, ymap=None, figsize=(10, 10)):
     Generate matrix plot of confusion matrix with pretty annotations.
     The plot image is saved to disk.
     args:
-      y_true:    true label of the data, with shape (nsamples,)
-      y_pred:    prediction of the data, with shape (nsamples,)
+      y_true:    true label of the input, with shape (nsamples,)
+      y_pred:    prediction of the input, with shape (nsamples,)
       filename:  filename of figure file to save
       labels:    string array, name the order of class labels in the confusion matrix.
                  use `clf.classes_` if using scikit-learn models.

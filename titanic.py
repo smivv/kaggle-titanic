@@ -72,8 +72,8 @@ num_cols = ['PassengerId', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare']
 # categorical columns
 cat_cols = [item for item in cols if item not in (num_cols + [label_column])]
 
-df_train = pandas.read_csv(os.path.join(DIR, 'data', 'train.csv'))
-df_test = pandas.read_csv(os.path.join(DIR, 'data', 'test.csv'))
+df_train = pandas.read_csv(os.path.join(DIR, 'input', 'train.csv'))
+df_test = pandas.read_csv(os.path.join(DIR, 'input', 'test.csv'))
 
 df_full = [df_train, df_test]
 
@@ -148,7 +148,7 @@ for dataset in df_full:
 
 print(df_train.head(10))
 
-# split the data into train and test
+# split the input into train and test
 # x_train, _, y_train, _ = train_test_split(df_train.drop(label_column, axis=1),
 #                                                     df_train[label_column],
 #                                                     test_size=0)
@@ -215,6 +215,6 @@ nb_y_pred = nb.predict(x_test)
 
 pred = nb.predict(x_test)
 submission = pandas.DataFrame({'PassengerId': df_test['PassengerId'], 'Survived': pred})
-submission.to_csv(os.path.join(DIR, 'data', 'gender_submission.csv'), index=False)
+submission.to_csv(os.path.join(DIR, 'input', 'gender_submission.csv'), index=False)
 
 
